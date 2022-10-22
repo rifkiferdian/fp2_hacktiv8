@@ -2,7 +2,6 @@
 const {
   Model
 } = require('sequelize');
-const User = require('User');
 module.exports = (sequelize, DataTypes) => {
   class SocialMedia extends Model {
     /**
