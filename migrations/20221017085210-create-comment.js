@@ -25,7 +25,7 @@ module.exports = {
         type: Sequelize.INTEGER,
         references: {
           model: {
-            tableName: 'Photo',
+            tableName: 'Photos',
             schema: 'public',
           },
           key: 'id'

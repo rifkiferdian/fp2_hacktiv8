@@ -24,13 +24,6 @@ module.exports = {
       UserId: {
         allowNull: false,
         type: Sequelize.INTEGER,
-        references: {
-          model: {
-            tableName: 'Users',
-            schema: 'public',
-          },
-          key: 'id',
-        }
       },
       createdAt: {
         allowNull: false,
@@ -41,6 +34,19 @@ module.exports = {
         type: Sequelize.DATE
       }
     });
+
+    await queryInterface.addConstraint('Photos', {
+      fields: ['UserId'],
+      type: "FOREIGN KEY",
+      name: 'user_fk',
+      references: { 
+        table: 'Users',
+        field: 'id'
+      },
+      onDelete: "cascade",
+      onUpdate: "cascade"
+    });
+
   },
   async down(queryInterface, Sequelize) {
     await queryInterface.dropTable('Photos');
