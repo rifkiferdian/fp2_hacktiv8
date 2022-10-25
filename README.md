@@ -16,12 +16,12 @@ Membuat API dengan database POstgreSQL
 ### Task
 - [X] npm init ke Github.
 - [x] Membuat database dan tabel ORM.
-- [ ] Membuat Autentikasi menggunakan JWT
-- [ ] Membuat Authorization menggunakan JWT
+- [X] Membuat Autentikasi menggunakan JWT
+- [x] Membuat Authorization menggunakan JWT
 - [x] Validasi ORM
-- [ ] Create API login
-- [ ] Create API register
-- [ ] Create API CRUD photo
+- [x] Create API login
+- [x] Create API register
+- [x] Create API CRUD photo
 - [ ] Create API CRUD commend
 - [ ] Create API CRUD soialmedia
 - [ ] Push Ke Heroku
