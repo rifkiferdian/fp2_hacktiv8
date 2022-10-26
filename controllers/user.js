@@ -17,7 +17,19 @@ class UserController {
             }
             res.status(201).json({user : dataView});
         } catch (error) {
-            res.status(500).json({error:error.errors[0].message});
+            if(error.name == 'SequelizeValidationError') {
+                return res.status(422).json({
+                    status : 'fail',
+                    errors : error.errors.map(e => e.message)
+                })
+            }
+            if(error.name == 'SequelizeUniqueConstraintError') {
+                return res.status(400).json({
+                    status: 'fail',
+                    errors : error.errors.map(e => e.message)
+                })
+            }
+            res.status(500).json({status: 'fail', message: 'Terjadi kesalahan pada server'});
         }
     }
 
@@ -31,7 +43,8 @@ class UserController {
 
             if (!data) {
                 res.status(400).json({
-                    error: "Email Is Incorrect",
+                    status: 'fail',
+                    message: "Email Is Incorrect",
                 });
             } else {
                 if (comparePassword(req.body.password, data.password)) {
@@ -43,12 +56,16 @@ class UserController {
                     res.status(200).json({ token : access_token });
                 } else {
                     res.status(400).json({
-                        error: "Password Is Incorrect",
+                        status: 'fail',
+                        message: "Password Is Incorrect",
                     });
                 }
             }
         } catch (error) {
-            res.status(500).json(error);
+            res.status(500).json({
+                status: 'fail',
+                message: 'Terjadi kesalahan pada server'
+            });
         }
     }
 
