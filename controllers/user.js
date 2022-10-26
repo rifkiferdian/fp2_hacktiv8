@@ -4,7 +4,7 @@ const { signToken } = require("../helpers/jwt");
 
 class UserController {
 
-    static async registerUser(req, res){
+    static async registerUser(req, res) {
         try {
             const InputUsers = await User.create(req.body);
             const dataView = {
@@ -15,21 +15,21 @@ class UserController {
                 age: InputUsers.age,
                 phone_number: InputUsers.phone_number,
             }
-            res.status(201).json({user : dataView});
+            res.status(201).json({ user: dataView });
         } catch (error) {
-            if(error.name == 'SequelizeValidationError') {
+            if (error.name == 'SequelizeValidationError') {
                 return res.status(422).json({
-                    status : 'fail',
-                    errors : error.errors.map(e => e.message)
+                    status: 'fail',
+                    errors: error.errors.map(e => e.message)
                 })
             }
-            if(error.name == 'SequelizeUniqueConstraintError') {
+            if (error.name == 'SequelizeUniqueConstraintError') {
                 return res.status(400).json({
                     status: 'fail',
-                    errors : error.errors.map(e => e.message)
+                    errors: error.errors.map(e => e.message)
                 })
             }
-            res.status(500).json({status: 'fail', message: 'Terjadi kesalahan pada server'});
+            res.status(500).json({ status: 'fail', message: 'Internal server error' });
         }
     }
 
@@ -53,7 +53,7 @@ class UserController {
                         email: data.email,
                         username: data.username,
                     });
-                    res.status(200).json({ token : access_token });
+                    res.status(200).json({ token: access_token });
                 } else {
                     res.status(400).json({
                         status: 'fail',
@@ -64,37 +64,40 @@ class UserController {
         } catch (error) {
             res.status(500).json({
                 status: 'fail',
-                message: 'Terjadi kesalahan pada server'
+                message: 'Internal server error'
             });
         }
     }
-
-    static async getUserById(req, res){
+    static async updateUser(req, res) {
         try {
-            const userId = req.params.userId
-            const data = await User.findByPk(userId);
-            if (!data) {
-                res.status(400).json({
-                    error: "User not found..!",
-                });
-            }else {
-                const dataView = {
-                    email: data.email,
-                    full_name: data.full_name,
-                    username: data.username,
-                    profile_image_url: data.profile_image_url,
-                    age: data.age,
-                    phone_number: data.phone_number,
-                }
-                res.status(200).json({user : dataView});
+            const id = +req.params.userId
+            const InputUsers = await User.update(req.body, { where: { id }, returning: true });
+            const dataView = {
+                email: InputUsers[1][0].email,
+                full_name: InputUsers[1][0].full_name,
+                username: InputUsers[1][0].username,
+                profile_image_url: InputUsers[1][0].profile_image_url,
+                age: InputUsers[1][0].age,
+                phone_number: InputUsers[1][0].phone_number,
             }
+            res.status(201).json({ user: dataView });
         } catch (error) {
-            res.status(500).json({message:error.message});
+            if (error.name == 'SequelizeValidationError') {
+                return res.status(422).json({
+                    status: 'fail',
+                    errors: error.errors.map(e => e.message)
+                })
+            }
+            if (error.name == 'SequelizeUniqueConstraintError') {
+                return res.status(400).json({
+                    status: 'fail',
+                    errors: error.errors.map(e => e.message)
+                })
+            }
+            res.status(500).json({ status: 'fail', message: 'Internal server error' });
         }
-        
     }
-
-    static async delUser(req, res){
+    static async delUser(req, res) {
         try {
             const userId = req.params.userId
             User.destroy({
@@ -102,9 +105,9 @@ class UserController {
                     id: userId
                 },
             });
-            res.status(200).json({message : "Your account has been successfully deleted"});
+            res.status(200).json({ message: "Your account has been successfully deleted" });
         } catch (error) {
-            res.status(500).json({message:error.message});
+            res.status(500).json({ message: error.message });
         }
     }
 

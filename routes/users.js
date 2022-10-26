@@ -8,7 +8,7 @@ router.post('/register', UserController.registerUser);
 router.post('/login', UserController.loginUser);
 
 router.use(authentication);
-router.get('/:userId', authorizationUser, UserController.getUserById);
+router.put('/:userId', authorizationUser, UserController.updateUser);
 router.delete('/:userId', authorizationUser, UserController.delUser);
 
 

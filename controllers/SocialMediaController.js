@@ -19,7 +19,7 @@ class SocialMediaController {
       console.error(e);
       res.status(500).json({
         status: 'fail',
-        message: 'Terjadi kesalahan pada server'
+        message: 'Internal server error'
       });
     }
   }
@@ -54,7 +54,7 @@ class SocialMediaController {
       console.error(error);
       res.status(500).json({
         status: 'fail',
-        message: 'Terjadi kesalahan pada server'
+        message: 'Internal server error'
       });
     }
   }
@@ -69,7 +69,7 @@ class SocialMediaController {
       console.error(error);
       res.status(500).json({
         status: 'fail',
-        message: 'Terjadi kesalahan pada server'
+        message: 'Internal server error'
       });
     }
   }

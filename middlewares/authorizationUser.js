@@ -6,15 +6,24 @@ const authorizationUser = async (req, res, next) => {
         const userId = req.params.userId
         const result = await User.findByPk(userId);
         if(!result) {
-            return res.status(404).json({message:'Id not found...!'})
+            return res.status(404).json({
+                status: 'fail',
+                message:'User not found...!'
+            })
         }
 
         if(result.id !== id_login){
-            return res.status(401).json({message:'Access Denied...!'})
+            return res.status(401).json({
+                status: 'fail',
+                message:'Access Denied...!'
+            })
         }
         next();
     } catch (error) {
-        return res.status(500).json(error)
+        return res.status(500).json({
+            status: 'fail',
+            message: 'Internal Server Error'
+        })
     }
 }
 

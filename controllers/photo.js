@@ -31,7 +31,7 @@ class PhotoController {
             }
             res.status(500).json({
                 status: 'fail',
-                message: 'Terjadi kesalahan pada server'
+                message: 'Internal server error'
             });
         }
     }
@@ -62,7 +62,7 @@ class PhotoController {
             }
             res.status(500).json({
                 status: 'fail',
-                message: 'Terjadi kesalahan pada server'
+                message: 'Internal server error'
             });
         }
     }
