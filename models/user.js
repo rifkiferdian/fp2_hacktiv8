@@ -22,9 +22,6 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        isAlpha: {
-          msg: 'full_name only accept letters.'
-        },
         notEmpty: {
           msg: 'full_name cannot be empty.',
         }
