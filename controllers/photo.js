@@ -23,7 +23,16 @@ class PhotoController {
             }
             res.status(201).json(dataView);
         } catch (error) {
-            res.status(500).json(error);
+            if(error.name == 'SequelizeValidationError') {
+                return res.status(422).json({
+                    status : 'fail',
+                    errors : error.errors.map(e => e.message)
+                })
+            }
+            res.status(500).json({
+                status: 'fail',
+                message: 'Terjadi kesalahan pada server'
+            });
         }
     }
 
@@ -43,9 +52,18 @@ class PhotoController {
                 },
                 returning: true,
             });
-            res.status(201).json({photo:result[id][0]});
+            res.status(201).json({photo:result[1][0]});
         } catch (error) {
-            res.status(500).json(error);
+            if(error.name == 'SequelizeValidationError') {
+                return res.status(422).json({
+                    status : 'fail',
+                    errors : error.errors.map(e => e.message)
+                })
+            }
+            res.status(500).json({
+                status: 'fail',
+                message: 'Terjadi kesalahan pada server'
+            });
         }
     }
     

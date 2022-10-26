@@ -10,6 +10,8 @@ app.use(express.json());
 const authentication = require('./middlewares/authentication');
 const usersRouter = require('./routes/users');
 const photosRouter = require('./routes/photos');
+const commetRouter = require('./routes/comment');
+const socialMediaRouter = require('./routes/social_media');
 
 app.get("/", async (req, res) => {
     const data = {
@@ -21,6 +23,8 @@ app.use('/users', usersRouter);
 
 app.use(authentication);
 app.use('/photos', photosRouter);
+app.use('/comments', commetRouter);
+app.use('/socialmedias', socialMediaRouter);
 
 
 app.listen(process.env.PORT, () => {

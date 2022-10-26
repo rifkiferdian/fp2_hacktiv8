@@ -2,7 +2,7 @@ const { verifyToken } = require("../helpers/jwt");
 
 const authentication = async (req, res, next) => {
     try {
-        const token = req.headers['x-access-token'];
+        const token = req.headers['token'];
         if(!token) {
             return res.status(401).json({message:'Need Token'})
         }else{

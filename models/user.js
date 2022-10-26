@@ -33,9 +33,13 @@ module.exports = (sequelize, DataTypes) => {
     email: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true,
+      unique: {
+        msg: 'email already exists'
+      },
       validate: {
-        isEmail: true,
+        isEmail: {
+          msg: 'email not valid'
+        },
         notEmpty: {
           msg: 'email cannot be empty.'
         }
@@ -65,7 +69,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       validate: {
         notEmpty: {
-          msg: 'profile image url cannot be empty.'
+          msg: 'profile_image url cannot be empty.'
         },
         isUrl: {
           msg: 'profile_image_url valid url.'
@@ -85,15 +89,15 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
     phone_number: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.BIGINT,
       allowNull: false,
       validate: {
-        isInt: {
-          msg: 'phone number must be number.'
-        },
         notEmpty: {
-          msg: 'phone number cannot be empty.'
+          msg: 'phone_number cannot be empty.'
         },
+        isNumeric: {
+          msg: 'phone_number must be a number.'
+        }
 
       }
     }
