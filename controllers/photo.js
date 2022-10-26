@@ -70,10 +70,7 @@ class PhotoController {
     static async GetPhotos(req, res) {
         try {
             const userId = res.locals.user.id
-            const data = await Photo.findAll({ 
-                where: { 
-                    UserId: userId 
-                },
+            const data = await Photo.findAll({
                 include : [
                     { 
                         model: Comment, 

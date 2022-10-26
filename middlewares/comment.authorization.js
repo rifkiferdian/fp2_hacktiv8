@@ -11,7 +11,7 @@ const commentAuthorization  = async (req, res, next) => {
             throw new AuthorizationError('Comment not found...!');
         }        
         if(comment.UserId !== UserId) {
-            throw new AuthorizationError('Anda tidak punya Akses di data ini...!');
+            throw new AuthorizationError('Access Denied...!');
         }
         next();
     } catch (error) {

@@ -35,6 +35,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     poster_image_url: {
       type: DataTypes.TEXT,
+      allowNull: false,
       validate: {
         notEmpty: {
           msg: 'poster_image_url cannot be empty.'
