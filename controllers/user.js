@@ -80,7 +80,7 @@ class UserController {
                 age: InputUsers[1][0].age,
                 phone_number: InputUsers[1][0].phone_number,
             }
-            res.status(201).json({ user: dataView });
+            res.status(200).json({ user: dataView });
         } catch (error) {
             if (error.name == 'SequelizeValidationError') {
                 return res.status(422).json({
