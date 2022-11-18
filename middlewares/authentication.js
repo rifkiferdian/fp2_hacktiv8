@@ -1,4 +1,5 @@
 const { verifyToken } = require("../helpers/jwt");
+const { User } = require("../models");
 
 const authentication = async (req, res, next) => {
     try {
@@ -7,8 +8,12 @@ const authentication = async (req, res, next) => {
             return res.status(401).json({message:'Need Token'})
         }else{
             const result = verifyToken(token);
-            res.locals.user = result
-            next()
+            const user = await User.findByPk(result.id)
+            if(user) {
+                res.locals.user = result;
+                next();
+            }
+            throw new Error("ada error");
         }
     } catch (error) {
         return res.status(401).json({
