@@ -12,6 +12,7 @@ const authentication = async (req, res, next) => {
             if(user) {
                 res.locals.user = result;
                 next();
+                return;
             }
             throw new Error("ada error");
         }
