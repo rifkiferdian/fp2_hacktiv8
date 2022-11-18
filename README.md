@@ -1,5 +1,5 @@
 Final Project 2 Hacktiv8
-Membuat API dengan database POstgreSQL
+Membuat API dengan database PostgreSQL
 
 🌱 Kelompok 3
 
@@ -14,5 +14,6 @@ Membuat API dengan database POstgreSQL
 - [x] Create API CRUD photo
 - [x] Create API CRUD commend
 - [x] Create API CRUD soialmedia
-- [ ] Push Ke Heroku
+- [x] Push Ke Railway
 
+URL : https://fp2hacktiv8-production.up.railway.app/
