@@ -29,6 +29,7 @@ class PhotoController {
                     errors : error.errors.map(e => e.message)
                 })
             }
+            console.log(error);
             res.status(500).json({
                 status: 'fail',
                 message: 'Internal server error'
